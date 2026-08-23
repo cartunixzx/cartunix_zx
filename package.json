@@ -1,0 +1,16 @@
+{
+  "name": "cartunix-zx",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Cartunix Zx all-in-one AI creator platform",
+  "scripts": {"start":"node server.js","dev":"node server.js"},
+  "dependencies": {
+    "bcryptjs":"^3.0.2",
+    "better-sqlite3":"^12.2.0",
+    "cors":"^2.8.5",
+    "dotenv":"^17.2.1",
+    "express":"^5.1.0",
+    "jsonwebtoken":"^9.0.2",
+    "multer":"^2.0.2"
+  }
+}
