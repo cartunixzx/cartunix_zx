@@ -1,41 +1,531 @@
 <!doctype html>
-<html lang="hi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Cartunix Zx — AI Creator Studio</title>
-<style>
-body{margin:0;background:#080808;color:#fff;font-family:system-ui,sans-serif}.wrap{max-width:1050px;margin:auto;padding:18px}
-header{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #292929;position:sticky;top:0;background:#080808;z-index:3}
-.logo{width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid #ffbf24}.sp{flex:1}.gold{color:#ffbf24}.pill,.btn{border-radius:12px;padding:11px 14px}.pill{border:1px solid #6a5012;color:#ffd76a}.btn{border:0;background:#ffbf24;font-weight:800}.btn.dark{background:#191919;color:#fff;border:1px solid #333}
-.hero{padding:45px 0}.hero h1{font-size:clamp(42px,8vw,76px);line-height:1;margin:0 0 15px}.hero p{color:#bbb;font-size:18px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card{background:#111;border:1px solid #292929;border-radius:18px;padding:18px;margin:10px 0}.tool{min-height:110px}.tool b{font-size:19px}.muted{color:#aaa}.studio{background:#0e0e0e;border:1px solid #292929;border-radius:20px;padding:18px}.input{width:100%;min-height:110px;background:#080808;color:#fff;border:1px solid #333;border-radius:12px;padding:12px;box-sizing:border-box}.upload{border:1px dashed #555;padding:20px;border-radius:12px;text-align:center;margin:12px 0}.qr{max-width:300px;width:100%;background:#fff;padding:8px;border-radius:15px}.social a{display:inline-block;color:#ffd76a;margin:6px;text-decoration:none}.hide{display:none}@media(max-width:700px){.cards{grid-template-columns:1fr 1fr}}@media(max-width:480px){.cards{grid-template-columns:1fr}}
-</style></head><body><div class="wrap">
-<header><img class="logo" src="logo.jpg"><b>Cartunix <span class="gold">Zx</span></b><div class="sp"></div><span class="pill">₹100 FREE</span><button class="btn dark" onclick="openLogin()">Login</button></header>
-<section class="hero"><span class="pill">ALL-IN-ONE AI CREATOR</span><h1>Create <span class="gold">Anything</span> with AI.</h1><p>Prompt लिखें या बोलें। Script, image, video, image-to-video और voice workflows एक ही जगह से शुरू करें।</p><button class="btn" onclick="document.getElementById('studio').scrollIntoView({behavior:'smooth'})">Start Creating</button></section>
-<h2>AI Tools</h2><section class="cards">
-<div class="card tool">🖼️ <b>AI Image</b><p class="muted">High-quality image workflow</p></div>
-<div class="card tool">🎬 <b>AI Video / Veo</b><p class="muted">Video generation integration</p></div>
-<div class="card tool">🎞️ <b>Image → Video</b><p class="muted">Upload and animate</p></div>
-<div class="card tool">🎙️ <b>AI Voice / VO</b><p class="muted">Voice generation</p></div>
-<div class="card tool">✍️ <b>AI Script</b><p class="muted">Idea to script</p></div>
-<div class="card tool">🎤 <b>Speak to Script</b><p class="muted">Voice input</p></div>
-</section>
-<h2 id="studio">Creator Workspace</h2><section class="studio"><textarea class="input" placeholder="कुछ लिखें या बोलकर बताएं…"></textarea>
-<div class="upload"><b>📤 Photo / Video Upload</b><br><input type="file" accept="image/*,video/*"></div>
-<button class="btn" onclick="alert('AI provider connect करने के बाद generation live होगी।')">AI से तैयार करें</button></section>
-<h2>Credits</h2><section class="cards">
-<div class="card"><h3>₹49</h3><p>Starter</p><button class="btn" onclick="pay(49)">Buy</button></div>
-<div class="card"><h3>₹199</h3><p>Creator</p><button class="btn" onclick="pay(199)">Buy</button></div>
-<div class="card"><h3>₹499</h3><p>Best Value</p><button class="btn" onclick="pay(499)">Buy</button></div>
-</section>
-<h2>QR Payment</h2><section class="card"><img class="qr" src="payment_qr.jpg"><p class="muted">Payment के बाद transaction ID और screenshot Support में भेजें।</p></section>
-<h2>Help & Support</h2><section class="card"><textarea id="ticket" class="input" placeholder="अपनी समस्या लिखें…"></textarea><br><br><input id="shot" type="file" accept="image/*,video/*"><br><br><button class="btn" onclick="ticket()">Submit Complaint</button><p><a class="gold" href="https://wa.me/916306390971" target="_blank">💬 Cartunix Zx WhatsApp Support</a></p></section>
-<h2>Social Media</h2><section class="card social"><a href="https://www.instagram.com/cartunix_zx" target="_blank">Instagram</a><a href="https://www.facebook.com/share/1DCWAvbqsG/" target="_blank">Facebook</a><a href="https://youtube.com/@cartunixzx" target="_blank">YouTube</a></section>
-<footer class="muted">© 2026 Cartunix Zx</footer>
+<html lang="hi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Cartunix Zx - AI Creator Studio</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #080808;
+      color: #fff;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    .wrap {
+      max-width: 1050px;
+      margin: auto;
+      padding: 18px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid #292929;
+      position: sticky;
+      top: 0;
+      background: #080808;
+      z-index: 5;
+    }
+
+    .logo {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #ffbf24;
+    }
+
+    .sp {
+      flex: 1;
+    }
+
+    .gold {
+      color: #ffbf24;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 7px 12px;
+      border-radius: 20px;
+      background: #171717;
+      border: 1px solid #333;
+      color: #ffbf24;
+      font-size: 13px;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .btn {
+      background: #ffbf24;
+      color: #111;
+      border: 0;
+      border-radius: 12px;
+      padding: 11px 16px;
+      font-weight: 700;
+    }
+
+    .btn.dark {
+      background: #191919;
+      color: #fff;
+      border: 1px solid #333;
+    }
+
+    .hero {
+      padding: 45px 0;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 8vw, 76px);
+      line-height: 1;
+      margin: 0 0 15px;
+    }
+
+    .hero p {
+      color: #bbb;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    h2 {
+      margin-top: 35px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .card {
+      background: #111;
+      border: 1px solid #292929;
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .tool {
+      min-height: 115px;
+    }
+
+    .muted {
+      color: #aaa;
+    }
+
+    .studio {
+      background: #0e0e0e;
+      border: 1px solid #292929;
+      border-radius: 20px;
+      padding: 18px;
+    }
+
+    .input {
+      width: 100%;
+      min-height: 110px;
+      background: #080808;
+      color: #fff;
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 14px;
+      resize: vertical;
+      font-size: 15px;
+    }
+
+    .upload {
+      margin: 14px 0;
+      padding: 20px;
+      border: 1px dashed #555;
+      border-radius: 14px;
+    }
+
+    .qr {
+      max-width: 300px;
+      width: 100%;
+      display: block;
+      margin: 10px auto;
+      border-radius: 15px;
+      background: #fff;
+      padding: 8px;
+    }
+
+    .social a {
+      color: #ffbf24;
+      text-decoration: none;
+      margin-right: 15px;
+    }
+
+    footer {
+      margin-top: 40px;
+      padding: 25px 0;
+      border-top: 1px solid #292929;
+      text-align: center;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.85);
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal.hide {
+      display: none;
+    }
+
+    .modal-box {
+      width: 100%;
+      max-width: 430px;
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 20px;
+      padding: 22px;
+    }
+
+    .modal-box input {
+      width: 100%;
+      margin: 7px 0;
+      padding: 13px;
+      border-radius: 10px;
+      border: 1px solid #333;
+      background: #080808;
+      color: #fff;
+    }
+
+    @media (max-width: 700px) {
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 48px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+  <header>
+    <img class="logo" src="logo.jpg" alt="Cartunix Zx">
+    <b>Cartunix <span class="gold">Zx</span></b>
+
+    <div class="sp"></div>
+
+    <span class="pill">₹100 FREE</span>
+
+    <button class="btn dark" onclick="openLogin()">
+      Login
+    </button>
+  </header>
+
+
+  <section class="hero">
+    <span class="pill">ALL-IN-ONE AI CREATOR</span>
+
+    <h1>
+      Create <span class="gold">Anything.</span>
+    </h1>
+
+    <p>
+      AI image, video, voice, script aur creative tools
+      ek hi jagah par.
+    </p>
+
+    <button class="btn" onclick="document.getElementById('studio').scrollIntoView({behavior:'smooth'})">
+      Start Creating
+    </button>
+  </section>
+
+
+  <h2>🤖 AI Tools</h2>
+
+  <section class="cards">
+
+    <div class="card tool">
+      <b>🖼️ AI Image</b>
+      <p class="muted">High-quality image creation workflow.</p>
+    </div>
+
+    <div class="card tool">
+      <b>🎬 AI Video</b>
+      <p class="muted">Video generation integration.</p>
+    </div>
+
+    <div class="card tool">
+      <b>🎞️ Image → Video</b>
+      <p class="muted">Upload image and animate it.</p>
+    </div>
+
+    <div class="card tool">
+      <b>🎙️ AI Voice</b>
+      <p class="muted">Voice generation workflow.</p>
+    </div>
+
+    <div class="card tool">
+      <b>✍️ AI Script</b>
+      <p class="muted">Idea ko script mein convert karein.</p>
+    </div>
+
+    <div class="card tool">
+      <b>🗣️ Speak → Script</b>
+      <p class="muted">Voice input se script banayein.</p>
+    </div>
+
+  </section>
+
+
+  <h2 id="studio">Creator Workspace</h2>
+
+  <section class="studio">
+
+    <textarea
+      id="prompt"
+      class="input"
+      placeholder="Kuch likhen ya bolkar batayein..."
+    ></textarea>
+
+    <div class="upload">
+      <b>📤 Photo / Video Upload</b>
+      <br><br>
+
+      <input
+        id="media"
+        type="file"
+        accept="image/*,video/*"
+      >
+    </div>
+
+    <button class="btn" onclick="generateAI()">
+      ✨ AI Se Taiyar Karein
+    </button>
+
+    <p id="result" class="muted"></p>
+
+  </section>
+
+
+  <h2>💳 Credits</h2>
+
+  <section class="cards">
+
+    <div class="card">
+      <h3>₹49</h3>
+      <p>Starter Pack</p>
+      <button class="btn" onclick="pay(49)">
+        Buy
+      </button>
+    </div>
+
+    <div class="card">
+      <h3>₹199</h3>
+      <p>Creator Pack</p>
+      <button class="btn" onclick="pay(199)">
+        Buy
+      </button>
+    </div>
+
+    <div class="card">
+      <h3>₹499</h3>
+      <p>Best Value</p>
+      <button class="btn" onclick="pay(499)">
+        Buy
+      </button>
+    </div>
+
+  </section>
+
+
+  <h2>📱 QR Payment</h2>
+
+  <section class="card">
+
+    <img
+      class="qr"
+      src="payment_qr.jpg"
+      alt="Payment QR"
+    >
+
+    <p class="muted">
+      Payment karne ke baad transaction ID submit karein.
+    </p>
+
+  </section>
+
+
+  <h2>🆘 Help & Support</h2>
+
+  <section class="card">
+
+    <textarea
+      id="ticket"
+      class="input"
+      placeholder="Apni problem likhein..."
+    ></textarea>
+
+    <br><br>
+
+    <button class="btn" onclick="sendTicket()">
+      Send Complaint
+    </button>
+
+    <p id="ticketResult" class="muted"></p>
+
+  </section>
+
+
+  <h2>📱 Social Media</h2>
+
+  <section class="card social">
+
+    <a
+      href="https://www.instagram.com/cartunix_zx"
+      target="_blank"
+    >
+      Instagram
+    </a>
+
+    <a
+      href="https://youtube.com/@cartunixzx"
+      target="_blank"
+    >
+      YouTube
+    </a>
+
+  </section>
+
+
+  <footer class="muted">
+    © 2026 Cartunix Zx — AI Creator Studio
+  </footer>
+
 </div>
-<div id="modal" class="hide" style="position:fixed;inset:0;background:#000c;z-index:10;padding:30px"><div class="card" style="max-width:420px;margin:60px auto"><h2>Cartunix Zx Login</h2><input id="email" class="input" style="min-height:auto" placeholder="Email"><br><br><input id="password" type="password" class="input" style="min-height:auto" placeholder="Password"><br><br><button class="btn" onclick="login()">Login</button> <button class="btn dark" onclick="closeLogin()">Close</button><p id="msg" class="muted"></p></div></div>
+
+
+<!-- LOGIN MODAL -->
+
+<div id="modal" class="modal hide">
+
+  <div class="modal-box">
+
+    <h2>🔐 Login</h2>
+
+    <input
+      id="email"
+      type="email"
+      placeholder="Email"
+    >
+
+    <input
+      id="password"
+      type="password"
+      placeholder="Password"
+    >
+
+    <br><br>
+
+    <button class="btn" onclick="login()">
+      Login
+    </button>
+
+    <button class="btn dark" onclick="closeLogin()">
+      Close
+    </button>
+
+    <p id="loginResult" class="muted"></p>
+
+  </div>
+
+</div>
+
+
 <script>
-let token=localStorage.getItem("cartunix_token")||"";
-function openLogin(){document.getElementById("modal").classList.remove("hide")}
-function closeLogin(){document.getElementById("modal").classList.add("hide")}
-async function login(){const r=await fetch("/api/auth/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:email.value,password:password.value})});const j=await r.json();if(!r.ok){msg.textContent=j.error||"Login failed";return}token=j.token;localStorage.setItem("cartunix_token",token);msg.textContent="Login successful";setTimeout(closeLogin,700)}
-async function ticket(){if(!token){openLogin();return}const f=new FormData();f.append("message",document.getElementById("ticket").value);if(shot.files[0])f.append("attachment",shot.files[0]);const r=await fetch("/api/tickets",{method:"POST",headers:{Authorization:"Bearer "+token},body:f});const j=await r.json();alert(r.ok?"Complaint ticket #"+j.id+" submitted":(j.error||"Error"))}
-async function pay(amount){if(!token){openLogin();return}const tx=prompt("Payment/Transaction ID डालें:");if(!tx)return;const r=await fetch("/api/orders",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+token},body:JSON.stringify({amount,transaction_id:tx})});const j=await r.json();alert(r.ok?"Order #"+j.order_id+" verification के लिए भेज दिया गया।":"Error: "+j.error)}
-</script></body></html>
+
+let token = localStorage.getItem("cartunix_token") || "";
+
+
+function openLogin() {
+  document.getElementById("modal").classList.remove("hide");
+}
+
+
+function closeLogin() {
+  document.getElementById("modal").classList.add("hide");
+}
+
+
+async function login() {
+
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+
+  if (!email || !password) {
+    document.getElementById("loginResult").textContent =
+      "Email aur password dono bharein.";
+    return;
+  }
+
+  try {
+
+    const response = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password
+      })
+    });
+
+    const data = await response.json();
+
+    if (data.token) {
+
+      token = data.token;
+
+      localStorage.setItem(
+        "cartunix_token",
+        token
+      );
+
+function pay(amount) {
+
+  if (!token) {
+    openLogin();
+    return;
+  }
+
+  const transactionId =
+    prompt(
+      "₹" + amount +
+      " payment karne ke baad Transaction ID enter karein:"
+    );
+
+  if (!transactionId) return;
+
+  alert(
+    "Transaction ID receive ho gayi. " +
+    "Payment verification ke baad credits add honge."
+  );
+}
+
+</script>
+
+</body>
+</html>
