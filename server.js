@@ -222,7 +222,7 @@ app.post("/api/ai/voice",auth,async(req,res)=>{
   res.json({status:"provider_required",message:"AI Voice provider API को .env में configure करें।"});
 });
 
-app.get("/*splat", (req,res)=>res.sendFile(path.join(__dirname,"index.html")));
+app.get("/{*splat}", (req,res)=>res.sendFile(path.join(__dirname,"index.html")));
 app.listen(PORT,()=>console.log(`Cartunix Zx running on http://localhost:${PORT}`));
 
 app.listen(PORT,()=>console.log(`Cartunix Zx running on http://localhost:${PORT}`));
